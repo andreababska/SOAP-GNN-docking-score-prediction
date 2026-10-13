@@ -19,7 +19,7 @@ Molecular docking is accurate but slow, which becomes a bottleneck when screenin
 - Three benchmarked pipelines for docking score prediction: SOAP + FFNN, DimeNet++, and GemNet
 - Automated hyperparameter search with Hyperopt TPE
 - Early stopping and per-epoch CSV logging (`epoch;train_mse;val_mse;best_val_mse;train_time_s;val_time_s`)
-- Two validation setups: Variant A (standard validation) and Variant B (validation targeted at low, i.e. best, docking scores)
+- Two validation setups, each evaluated with 5-fold cross-validation: Variant A (standard validation) and Variant B (validation targeted at low, i.e. best, docking scores)
 - Scripts for visualizing docking score distributions
 
 ## 🔬 The Process
@@ -27,7 +27,7 @@ Molecular docking is accurate but slow, which becomes a bottleneck when screenin
 1. **Data:** Molecular structures in XYZ format (`in_vivo.xyz`, `in_vitro.xyz`, from Bucinsky et al. / Dryad). The `in_vivo` set contains 59,884 molecules with docking scores from -14.84 to -1.03 kcal/mol.
 2. **Model design:** Compared a descriptor-based approach (SOAP + FFNN) with two geometric graph neural networks (DimeNet++ and GemNet).
 3. **Training and optimization:** Models were trained in PyTorch / PyTorch Geometric, with Hyperopt used to tune hyperparameters. Large-scale runs were executed on the Devana supercomputer, including handling of CUDA out-of-memory errors.
-4. **Evaluation:** Models were compared on global metrics (R², MSE) and on how well they rank the best-scoring molecules, which matters most for virtual screening.
+4. **Evaluation:** Both Variant A and Variant B were evaluated with 5-fold cross-validation, so every model was trained and tested on five different train/validation splits. Models were compared on global metrics (R², MSE) and on how well they rank the best-scoring molecules, which matters most for virtual screening.
 
 ## 📊 Results
 
