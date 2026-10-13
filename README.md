@@ -32,9 +32,16 @@ Molecular docking is accurate but slow, which becomes a bottleneck when screenin
 ## 📊 Results
 
 - Global accuracy is essentially the same for all three models, but computational cost differs by orders of magnitude (minutes for SOAP vs. many hours for GemNet per fold).
-- DimeNet++ with Variant B is the only configuration that clearly improves the strongly binding region and lowers fold-to-fold variability.
+- **DimeNet++ with Variant B** is the only configuration that clearly improves the strongly binding region and lowers fold-to-fold variability.
 - All models underpredict the strongest binders, and they agree with each other more than with the reference, suggesting the residual error comes mainly from the data.
-- Recommended for virtual screening: DimeNet++ with Variant B.
+- **Recommended for virtual screening:** DimeNet++ with Variant B.
+
+<p align="center">
+  <img src="models_variantA.png" width="45%" alt="Variant A: error by docking score bin">
+  <img src="models_variantB.png" width="45%" alt="Variant B: error by docking score bin">
+</p>
+
+*MSE and mean error per docking score bin. In the strongest-binding bin, DimeNet++ with Variant B has clearly the lowest error.*
 
 ## 💡 What I Learned
 
