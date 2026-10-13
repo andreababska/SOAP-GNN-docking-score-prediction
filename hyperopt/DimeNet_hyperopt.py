@@ -6,7 +6,7 @@ import pandas as pd
 import torch
 
 from hyperopt import fmin, tpe, hp, STATUS_OK, Trials
-from hyperopt.pyll import scope                        # Opravený import pre scope.int()
+from hyperopt.pyll import scope                       
 
 from ase.io import read
 from sklearn.model_selection import train_test_split
@@ -204,14 +204,6 @@ def objective(params):
 # ==============================================================================
 # === HYPERPARAMETROVÝ PRIESTOR ===
 # ==============================================================================
-#
-#  Zmeny oproti pôvodnému kódu:
-#   • hp.loguniform pre lr a weight_decay  – LR má logaritmickú citlivosť
-#   • batch_size znova zahrnutý
-#   • num_blocks / num_radial / num_spherical majú menší rozsah (reálne hodnoty)
-#   • basis_emb_size rozšírený na 4–16
-#   • out_emb_channels rozšírený o hodnotu 256
-#   • weight_decay pridaný ako nový hyperparameter
 
 space = {
     'lr':               hp.loguniform('lr',            np.log(1e-4), np.log(1e-2)),
@@ -262,7 +254,7 @@ def export_trials_to_csv(trials, filename="DimeNet_hyperopt.csv"):
     batch_size_vals       = [16, 32, 64]
     hidden_channels_vals  = [64, 128, 256]
     int_emb_size_vals     = [32, 64, 128]
-    out_emb_channels_vals = [64, 128, 256]   # musí súhlasiť s hp.choice vyššie
+    out_emb_channels_vals = [64, 128, 256]  
 
     records = []
     for trial in trials.trials:
